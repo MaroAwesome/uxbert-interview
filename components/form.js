@@ -7,10 +7,16 @@ const Form = (props) => {
   const dispatch = useDispatch();
 
   const onSubit = (data) => {
-    dispatch({
-      type: "Submit",
-      form: data,
-    });
+    fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
+    }).then(
+      dispatch({
+        type: "Submit",
+        form: data,
+      })
+    );
     Router.push("/profile");
   };
 
